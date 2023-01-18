@@ -4,7 +4,8 @@
 
 ### Installation instructions:
 Clone the repository to a folder of your choice and install required modules  
-```cd \\weather-rig
+```
+cd \\weather-rig
 
 python -m venv venv
 
