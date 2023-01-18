@@ -1,0 +1,21 @@
+# Your weatherapi.com api key (up to 1,000,000 requests per month free)
+weatherAPIKey: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+               
+# Check temperature interval in seconds
+checkInterval: 1800
+
+# Batch file you want to start or stop
+scriptPath: "C:\\Users\\user\\Documents\\scripts\\miner.bat"
+runAsAdmin: False
+
+# Location and Temperature settings
+cityAndState: "Richmond, VA"
+tempUnits: "F"
+# Start script below this temperature:
+startTemp: 70
+
+# Stop script above this temperature:
+stopTemp: 85
+
+# Will start script if current temperature is below stopTemp:
+runAtStart: True
