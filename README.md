@@ -23,4 +23,3 @@ python .\src\weather-rig.py
 
 ### Known issues:  
 You will need to run python as admin if you want to start your script as admin.  
-The `runAsAdmin` parameter in config.yaml does not do anything.  

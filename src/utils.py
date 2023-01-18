@@ -1,6 +1,7 @@
 import yaml
 import requests
 import psutil
+import time
 
 from geopy.geocoders import Nominatim
 
@@ -15,7 +16,7 @@ def getLocation(addr):
     location = geolocator.geocode(addr)
     return location.latitude, location.longitude
 
-def getHrTemperature(key, lat, log):
+def getTemperature(key, lat, log):
     response = requests.get(f"https://api.weatherapi.com/v1/current.json?key={key}&q={lat} {log}&aqi=no").json()
     tempC = response['current']['temp_c']
     tempF = response['current']['temp_f']
@@ -26,4 +27,10 @@ def checkProcess(pid):
     if psutil.pid_exists(pid):
         return True
     else:
-        return False
+        return False    
+    
+def currentTime():
+    return time.strftime("%H:%M:%S", time.localtime())
+
+def HrMinSec(seconds):
+    return time.strftime("%H hr, %M min, %S s", time.gmtime(seconds))

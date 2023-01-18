@@ -7,15 +7,15 @@ import process
 class WeatherRig():
     def __init__(self, config):
         self.config = utils.getConfig(config)
-        self.location = self.config["cityAndState"]
-        self.scriptPath = self.config["scriptPath"]
-        self.admin = self.config["runAsAdmin"]
         self.apikey = self.config["weatherAPIKey"]
+        self.checkInterval = self.config['checkInterval'] 
+        self.scriptPath = self.config["scriptPath"]
+        
+        self.location = self.config["cityAndState"]
+        self.tempUnits = self.config['tempUnits']
         self.startTemp = self.config["startTemp"]
         self.stopTemp = self.config["stopTemp"]
         self.runAtStart = self.config["runAtStart"]
-        self.tempUnits = self.config['tempUnits']
-        self.checkInterval = self.config['checkInterval'] 
         
         self.lat, self.log = utils.getLocation(self.location)
         self.process = process.Process(self.scriptPath)
@@ -23,7 +23,7 @@ class WeatherRig():
         
         
     def getCurTemperature(self):
-        tempC, tempF = utils.getHrTemperature(self.apikey, self.lat, self.log)
+        tempC, tempF = utils.getTemperature(self.apikey, self.lat, self.log)
         if self.tempUnits == "F":
             return tempF
         elif self.tempUnits == "C":
@@ -55,10 +55,11 @@ class WeatherRig():
 if __name__ == "__main__":
     app = WeatherRig("./src/config.yaml")
     
+    # Start loop
     while True:
-        curt = time.strftime("%H:%M:%S",time.localtime())
+        curTtme = utils.currentTime()
         temperature = app.getCurTemperature()
-        print(f"Time: {curt} | Temperature in {app.location}:", temperature, f"{app.tempUnits}")
+        print(f"Time: {curTtme} | Temperature in {app.location}:", temperature, f"{app.tempUnits}")
         i = app.checkTcond()
         if app.checkProc():
             print("Script not running! You may have accidentally closed it. ") 
@@ -75,6 +76,6 @@ if __name__ == "__main__":
             else:
                 print(f"Temperature within acceptable range, doing nothing. Process ID: {app.pid}")
         
-        print(f"Sleeping {app.checkInterval} seconds...\n")    
+        print(f"Sleeping {utils.HrMinSec(app.checkInterval)}...\n")    
         time.sleep(app.checkInterval)
         
