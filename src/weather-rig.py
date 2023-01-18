@@ -59,7 +59,7 @@ if __name__ == "__main__":
         print(f"Time: {curt} | Temperature in {app.location}:", temperature, f"{app.tempUnits}")
         i = app.checkTcond()
         if app.checkProc():
-            print("Script not found! You may have accidentally closed it. ") 
+            print("Script not running! You may have accidentally closed it. ") 
         
         if app.pid == None:
             if i != 0:
