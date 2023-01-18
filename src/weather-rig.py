@@ -1,6 +1,8 @@
+import time
+
 import utils
 import process
-import time
+
 
 class WeatherRig():
     def __init__(self, config):

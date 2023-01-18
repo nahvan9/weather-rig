@@ -1,7 +1,8 @@
-from geopy.geocoders import Nominatim
 import yaml
 import requests
 import psutil
+
+from geopy.geocoders import Nominatim
 
 
 def getConfig(file):
