@@ -17,5 +17,6 @@ pip install -r requirments.txt
 Configure your config.yaml (remove .default extension)  
 
 Run the app:  
-`python .\src\weather-rig.py`  
-
+```
+python .\src\weather-rig.py
+```
