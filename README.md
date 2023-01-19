@@ -15,10 +15,12 @@ pip install -r requirments.txt
 ```
 
 Configure your config.yaml (remove .default extension)  
+  - You will need your own weatherapi.com API key (free for up to 1,000,000 requests per month).  
+  - To enable discord notifications, you will need to enter your own webhook URL.  
 
 Run the app:  
 ```
-python .\src\weather-rig.py
+python .\src\manager.py
 ```
 
 ### Known issues:  

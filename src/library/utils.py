@@ -11,9 +11,25 @@ def getConfig(file):
         obj = yaml.safe_load(y)
     return obj
 
+def getOptions(file):
+    options = getConfig(file)['notifications']
+    return options
+
+def getOptionsAsArrys(dictArr):
+    keysArr = []
+    valArr = []
+
+    for i in dictArr:
+        [(key, value)] = i.items()
+        keysArr.append(key)
+        valArr.append(value)
+
+    return [keysArr, valArr]
+
 def getLocation(addr):
     geolocator = Nominatim(user_agent="App")
     location = geolocator.geocode(addr)
+
     return location.latitude, location.longitude
 
 def getTemperature(key, lat, log):
@@ -32,5 +48,24 @@ def checkProcess(pid):
 def currentTime():
     return time.strftime("%H:%M:%S", time.localtime())
 
+def currentTimeFile():
+    return time.strftime("%H_%M_%S", time.localtime())
+
 def HrMinSec(seconds):
     return time.strftime("%H hr, %M min, %S s", time.gmtime(seconds))
+
+# def unpackDict(dict):
+#     k = []
+#     v = []
+#     for key in dict:
+#         v.append(dict[key])
+#         k.append(key)
+
+#     return [k, v]
+
+def strDictValues(dict):
+    copyDict = dict
+    for key in copyDict:
+        copyDict[key] = str(copyDict[key])
+
+    return copyDict

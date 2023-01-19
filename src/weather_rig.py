@@ -1,11 +1,14 @@
 import time
 
-import utils
-import process
+from library import utils
+from library import process
 
+from library.status import Status
 
 class WeatherRig():
-    def __init__(self, config):
+    def __init__(self, manager, config):
+        self.manager = manager
+        self.status = Status(self)
         self.config = utils.getConfig(config)
         self.apikey = self.config["weatherAPIKey"]
         self.checkInterval = self.config['checkInterval'] 
@@ -20,6 +23,14 @@ class WeatherRig():
         self.lat, self.log = utils.getLocation(self.location)
         self.process = process.Process(self.scriptPath)
         self.pid = None
+
+        # Private atributes
+        self._timeToWaitString = utils.HrMinSec(self.checkInterval)
+        self._temperature = None
+        self._curTime = None
+        self._TCond = None
+        self._procStat = None
+
         
         
     def getCurTemperature(self):
@@ -50,8 +61,59 @@ class WeatherRig():
             if utils.checkProcess(self.pid) == False:
                 self.pid = None
                 return True
+        else:
+            return False
+
     
-    
+    def run(self):
+        self._curTtme = utils.currentTime()
+        self._temperature = self.getCurTemperature()
+        self._TCond = self.checkTcond()
+        self._procStat = self.checkProc()
+
+        returnValue = None
+        if self.pid == None:
+            if self._TCond != 0:
+                # Temperature in range and script not started. Start script. 
+                if self._procStat: 
+                # Not the first instance started 
+                    returnValue = 2
+                else:
+                    returnValue = 1
+                
+                self.startScript()
+        elif self.pid != None:
+            if self._TCond == 0:
+                # temperature exceed limits. stop script
+                self.stopScript()
+                returnValue = 0
+            else:
+                # temp in range, script already running. do nothing
+                returnValue = -1
+
+        self.status.statusMessage(returnCode=returnValue)
+
+        # API
+        data = {
+            'Time': self._curTtme,
+            'Location': self.location,
+            'Temperature': self._temperature,
+            'Temperature Bounds': [self.startTemp, self.stopTemp],
+            'Temp Units': self.tempUnits,
+            'Return': returnValue,
+            'Status': self.status.status,
+            'Process ID': self.pid,
+        }
+
+        return data
+
+    def waitNext(self):
+        time.sleep(self.checkInterval)
+        return        
+
+
+# Test stand-alone, no notifications
+
 if __name__ == "__main__":
     app = WeatherRig("./src/config.yaml")
     
