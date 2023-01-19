@@ -25,10 +25,10 @@ class NotificationManager():
             self._discord = DiscordNotifs(webhookurl=url)
             self._services.append(self._discord)
         if self.logging == True:
-            self._logger 
+            self._logger = Logger()
             self._services.append(self._logger)
         if self.cmdMsg == True:
-            self._printCli
+            self._printCli = CmdMsg()
             self._services.append(self._printCli)
 
     # Each service must have a "post" method
