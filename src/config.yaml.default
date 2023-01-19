@@ -1,6 +1,15 @@
 # Your weatherapi.com api key (up to 1,000,000 requests per month free)
 weatherAPIKey: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-               
+
+# Alerts and options
+notifications: 
+  - discord: True
+  - cmd_output: True
+  - logging: False
+
+# Enable discord webhook alerts - enter your webhook url
+webhookurl: "https://discord.com/api/webhooks/"
+
 # Check temperature interval in seconds
 checkInterval: 1800
 

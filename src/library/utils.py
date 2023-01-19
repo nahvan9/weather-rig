@@ -11,6 +11,10 @@ def getConfig(file):
         obj = yaml.safe_load(y)
     return obj
 
+def getOptions(file):
+    return getConfig(file)['notifications']
+
+
 def getLocation(addr):
     geolocator = Nominatim(user_agent="App")
     location = geolocator.geocode(addr)

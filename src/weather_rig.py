@@ -1,7 +1,7 @@
 import time
 
-import utils
-import process
+from library import utils
+from library import process
 
 
 class WeatherRig():
@@ -20,6 +20,14 @@ class WeatherRig():
         self.lat, self.log = utils.getLocation(self.location)
         self.process = process.Process(self.scriptPath)
         self.pid = None
+
+        # Private atributes
+        self._timeToWaitString = utils.HrMinSec(self.checkInterval)
+        self._temperature = None
+        self._curTime = None
+        self._TCond = None
+        self._procStat = None
+
         
         
     def getCurTemperature(self):
@@ -51,7 +59,29 @@ class WeatherRig():
                 self.pid = None
                 return True
     
-    
+    def run(self):
+        self._curTtme = utils.currentTime()
+        self._temperature = self.getCurTemperature()
+        self._TCond = self.checkTcond()
+        self._procStat = self.checkProc()
+            
+        if self.pid == None:
+            if self._TCond != 0:
+                # temperature in range and script not started. Start script. 
+                return 1
+        elif self.pid != None:
+            if self._TCond == 0:
+                # temperature exceed limits. stop script
+                return 0
+            else:
+                # temp in range, script already running. do nothing
+                return -1
+
+    def waitNext(self):
+        time.sleep(self.checkInterval)
+        return        
+
+
 if __name__ == "__main__":
     app = WeatherRig("./src/config.yaml")
     
