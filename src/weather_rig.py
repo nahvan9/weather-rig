@@ -96,7 +96,9 @@ class WeatherRig():
         # API
         data = {
             'Time': self._curTtme,
+            'Location': self.location,
             'Temperature': self._temperature,
+            'Temperature Bounds': [self.startTemp, self.stopTemp],
             'Temp Units': self.tempUnits,
             'Return': returnValue,
             'Status': self.status.status,
