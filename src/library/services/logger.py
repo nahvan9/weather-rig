@@ -1,3 +1,5 @@
+# Service class to log output to log files
+
 import logging
 import os
 import time
@@ -9,7 +11,7 @@ class Logger():
         self.manager = manager
         self.curTime = utils.currentTimeFile()
         self.logPath = os.path.join(logDir, self.curTime+".log")
-        self.level = logging.getLevelName(self.manager.config['logLevel'])
+        self.level = logging.getLevelName(self.manager.manager.config['logLevel'])
 
         if not os.path.exists(logDir):
             os.makedirs(logDir)
@@ -21,7 +23,13 @@ class Logger():
             format='%(asctime)s %(message)s'
         )
 
+        self.manager.addOutputs('Log Path', self.logPath)
+
         
-    def post(self, content):
+    def post(self, content, *args, **kwargs):
         logging.info(content)
+        if args != ():
+            logging.info(args)
+        if kwargs != {}:
+            logging.info(kwargs)
     

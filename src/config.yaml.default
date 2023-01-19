@@ -3,7 +3,7 @@ weatherAPIKey: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 
 # Alerts and options
 notifications: 
-  discord: True
+  discord: False
   cmd_output: True
   logging: False
 
@@ -11,7 +11,7 @@ notifications:
 webhookurl: "https://discord.com/api/webhooks/"
 
 # Path to log directory
-logDir: "./logs"
+logDir: ".\\logs"
 logLevel: "DEBUG"
 
 # Check temperature interval in seconds

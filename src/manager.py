@@ -6,6 +6,8 @@ from library.notifications import NotificationManager
 
 class Manager():
     def __init__(self, config):
+        self._notificationOutputs = None
+
         self.config = utils.getConfig(config)
         self.app = WeatherRig(config)
         self.options = utils.getOptions(config)
@@ -14,7 +16,12 @@ class Manager():
     def run(self):
         while True:
             output = self.app.run()
-            self.notifications.postServices(output)
+            if self.notifications.getOutputs != {}:
+                notificationOutputs = self.notifications.getOutputs
+                self.notifications.postServices(output, notificationOutputs)
+            else:
+                self.notifications.postServices(output)
+                
             self.app.waitNext()
 
 

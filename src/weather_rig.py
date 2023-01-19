@@ -58,29 +58,53 @@ class WeatherRig():
             if utils.checkProcess(self.pid) == False:
                 self.pid = None
                 return True
+        else:
+            return False
+
     
     def run(self):
         self._curTtme = utils.currentTime()
         self._temperature = self.getCurTemperature()
         self._TCond = self.checkTcond()
         self._procStat = self.checkProc()
-            
+
+        returnValue = None
         if self.pid == None:
             if self._TCond != 0:
-                # temperature in range and script not started. Start script. 
-                return 1
+                # Temperature in range and script not started. Start script. 
+                if self._procStat: 
+                # Not the first instance started 
+                    returnValue = 2
+                else:
+                    returnValue = 1
+                
+                self.startScript()
         elif self.pid != None:
             if self._TCond == 0:
                 # temperature exceed limits. stop script
-                return 0
+                self.stopScript()
+                returnValue = 0
             else:
                 # temp in range, script already running. do nothing
-                return -1
+                returnValue = -1
+
+        # API
+        data = {
+            'Time': self._curTtme,
+            'Temperature': self._temperature,
+            'Temp Units': self.tempUnits,
+            'Return': returnValue,
+            'Process ID': self.pid,
+        }
+
+        return data
 
     def waitNext(self):
         time.sleep(self.checkInterval)
         return        
 
+
+# Test stand-alone, no notifications
 
 if __name__ == "__main__":
     app = WeatherRig("./src/config.yaml")
