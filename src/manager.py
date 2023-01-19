@@ -14,9 +14,9 @@ class Manager():
     def run(self):
         while True:
             output = self.app.run()
-            print(output)
+            self.notifications.postServices(output)
             self.app.waitNext()
-            
+
 
 if __name__ == "__main__":
     app = Manager(config="./src/config.yaml")

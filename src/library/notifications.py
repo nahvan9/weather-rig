@@ -22,17 +22,17 @@ class NotificationManager():
     def startServices(self):
         if self.dscNotif == True:
             url = self.manager.config['webhookurl']
-            self._discord = DiscordNotifs(webhookurl=url)
+            self._discord = DiscordNotifs(self.manager, webhookurl=url)
             self._services.append(self._discord)
         if self.logging == True:
-            self._logger = Logger()
+            self._logger = Logger(self.manager)
             self._services.append(self._logger)
         if self.cmdMsg == True:
-            self._printCli = CmdMsg()
+            self._printCli = CmdMsg(self.manager)
             self._services.append(self._printCli)
 
     # Each service must have a "post" method
-    def postServices(self):
+    def postServices(self, signal, **kwargs):
         for service in self._services:
-            service.post()
+            service.post(signal, **kwargs)
 
