@@ -9,15 +9,15 @@ class Manager():
         self._notificationOutputs = None
 
         self.config = utils.getConfig(config)
-        self.app = WeatherRig(config)
+        self.app = WeatherRig(self, config)
         self.options = utils.getOptions(config)
         self.notifications = NotificationManager(self, self.options)
 
     def run(self):
         while True:
             output = self.app.run()
-            if self.notifications.getOutputs != {}:
-                notificationOutputs = self.notifications.getOutputs
+            if self.notifications.outputs != {}:
+                notificationOutputs = self.notifications.outputs
                 self.notifications.postServices(output, notificationOutputs)
             else:
                 self.notifications.postServices(output)

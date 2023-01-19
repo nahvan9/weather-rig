@@ -3,9 +3,12 @@ import time
 from library import utils
 from library import process
 
+from library.status import Status
 
 class WeatherRig():
-    def __init__(self, config):
+    def __init__(self, manager, config):
+        self.manager = manager
+        self.status = Status(self)
         self.config = utils.getConfig(config)
         self.apikey = self.config["weatherAPIKey"]
         self.checkInterval = self.config['checkInterval'] 
@@ -88,12 +91,15 @@ class WeatherRig():
                 # temp in range, script already running. do nothing
                 returnValue = -1
 
+        self.status.statusMessage(returnCode=returnValue)
+
         # API
         data = {
             'Time': self._curTtme,
             'Temperature': self._temperature,
             'Temp Units': self.tempUnits,
             'Return': returnValue,
+            'Status': self.status.status,
             'Process ID': self.pid,
         }
 

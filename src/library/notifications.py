@@ -38,10 +38,9 @@ class NotificationManager():
         for service in self._services:
             service.post(data, *args, **kwargs)
 
-
     def addOutputs(self, key, value):
         self._ouputs[key] = value
 
     @property
-    def getOutputs(self):
+    def outputs(self):
         return self._ouputs

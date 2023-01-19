@@ -54,14 +54,14 @@ def currentTimeFile():
 def HrMinSec(seconds):
     return time.strftime("%H hr, %M min, %S s", time.gmtime(seconds))
 
-def unpackDict(dict):
-    k = []
-    v = []
-    for key in dict:
-        v.append(dict[key])
-        k.append(key)
+# def unpackDict(dict):
+#     k = []
+#     v = []
+#     for key in dict:
+#         v.append(dict[key])
+#         k.append(key)
 
-    return [k, v]
+#     return [k, v]
 
 def strDictValues(dict):
     copyDict = dict
