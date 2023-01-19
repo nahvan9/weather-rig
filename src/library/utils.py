@@ -12,12 +12,24 @@ def getConfig(file):
     return obj
 
 def getOptions(file):
-    return getConfig(file)['notifications']
+    options = getConfig(file)['notifications']
+    return options
 
+def getOptionsAsArrys(dictArr):
+    keysArr = []
+    valArr = []
+
+    for i in dictArr:
+        [(key, value)] = i.items()
+        keysArr.append(key)
+        valArr.append(value)
+
+    return [keysArr, valArr]
 
 def getLocation(addr):
     geolocator = Nominatim(user_agent="App")
     location = geolocator.geocode(addr)
+    
     return location.latitude, location.longitude
 
 def getTemperature(key, lat, log):

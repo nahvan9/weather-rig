@@ -3,9 +3,9 @@ weatherAPIKey: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 
 # Alerts and options
 notifications: 
-  - discord: True
-  - cmd_output: True
-  - logging: False
+  discord: True
+  cmd_output: True
+  logging: False
 
 # Enable discord webhook alerts - enter your webhook url
 webhookurl: "https://discord.com/api/webhooks/"
