@@ -22,6 +22,10 @@ Run the app:
 ```
 python .\src\manager.py
 ```
+Or, run the raw backend without notifications:
+```
+python .\src\weather_rig.py
+```
 
 ### Known issues:  
 You will need to run python as admin if you want to start your script as admin.  
