@@ -18,7 +18,7 @@ Configure your config.yaml (remove .default extension)
 
 Run the app:  
 ```
-python .\src\weather-rig.py
+python .\src\manager.py
 ```
 
 ### Known issues:  
