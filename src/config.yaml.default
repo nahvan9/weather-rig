@@ -10,6 +10,10 @@ notifications:
 # Enable discord webhook alerts - enter your webhook url
 webhookurl: "https://discord.com/api/webhooks/"
 
+# Path to log directory
+logDir: "./logs"
+logLevel: "DEBUG"
+
 # Check temperature interval in seconds
 checkInterval: 1800
 

@@ -20,3 +20,4 @@ class Manager():
 
 if __name__ == "__main__":
     app = Manager(config="./src/config.yaml")
+    app.run()

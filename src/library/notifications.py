@@ -25,7 +25,8 @@ class NotificationManager():
             self._discord = DiscordNotifs(self.manager, webhookurl=url)
             self._services.append(self._discord)
         if self.logging == True:
-            self._logger = Logger(self.manager)
+            logDir = self.manager.config['logDir']
+            self._logger = Logger(self.manager, logDir)
             self._services.append(self._logger)
         if self.cmdMsg == True:
             self._printCli = CmdMsg(self.manager)

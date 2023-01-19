@@ -154,3 +154,5 @@ cython_debug/
 # test files
 test.bat
 config.yaml
+/logs/*
+/logs

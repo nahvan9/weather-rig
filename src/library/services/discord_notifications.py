@@ -5,5 +5,5 @@ class DiscordNotifs():
         self.manager = manager
         self.discord = Discord(url=webhookurl)
 
-    def postMessage(self, content):
+    def post(self, content):
         self.discord.post(content=content)

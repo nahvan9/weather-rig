@@ -29,7 +29,7 @@ def getOptionsAsArrys(dictArr):
 def getLocation(addr):
     geolocator = Nominatim(user_agent="App")
     location = geolocator.geocode(addr)
-    
+
     return location.latitude, location.longitude
 
 def getTemperature(key, lat, log):
@@ -47,6 +47,9 @@ def checkProcess(pid):
     
 def currentTime():
     return time.strftime("%H:%M:%S", time.localtime())
+
+def currentTimeFile():
+    return time.strftime("%H_%M_%S", time.localtime())
 
 def HrMinSec(seconds):
     return time.strftime("%H hr, %M min, %S s", time.gmtime(seconds))
