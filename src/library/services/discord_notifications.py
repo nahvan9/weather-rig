@@ -17,7 +17,7 @@ class DiscordNotifs():
         
         # Get available custom stats
         for key in content.keys():
-            if key in disc_msg.labelConversions:
+            if key in disc_msg.customMessageFormat:
                 customNotifs.append(key)
         
         # Format custom stats
@@ -30,7 +30,7 @@ class DiscordNotifs():
 
     # Returns custom discord notifications    
     def getMsg(self, key, *args, **kwargs):
-        label = disc_msg.labelConversions[key]
+        label = disc_msg.customMessageFormat[key]
         func = getattr(disc_msg, label)
         return func(*args, **kwargs)
     

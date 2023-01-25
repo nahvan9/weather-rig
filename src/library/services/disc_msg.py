@@ -30,12 +30,12 @@ def chkInterval(value, *args, **kwargs):
     return f':timer: Next status check in {utils.HrMinSec(value)}'
 
 # get function names
-labelConversions = {
+customMessageFormat = {
     'Time': 'time',
     'Location': 'location',
     'Temperature': 'temperature',
     'Temperature Bounds': 'tempBounds',
-    'Return': 'rtn',
+    # 'Return': 'rtn',
     'Status': 'status',
     'Process ID': 'pid',
     'Worker Name': 'machine',

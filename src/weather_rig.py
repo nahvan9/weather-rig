@@ -97,6 +97,7 @@ class WeatherRig():
 
         # API
         data = {
+            'Worker Name': self.workerName,
             'Time': self._curTtme,
             'Location': self.location,
             'Temperature': self._temperature,
@@ -105,7 +106,6 @@ class WeatherRig():
             'Return': returnValue,
             'Status': self.status.status,
             'Process ID': self.pid,
-            'Worker Name': self.workerName,
             'Check Interval': self.checkInterval,
         }
 
