@@ -14,6 +14,8 @@ class WeatherRig():
         self.checkInterval = self.config['checkInterval'] 
         self.scriptPath = self.config["scriptPath"]
         
+        self.workerName = self.config["workerName"]
+        
         self.location = self.config["cityAndState"]
         self.tempUnits = self.config['tempUnits']
         self.startTemp = self.config["startTemp"]
@@ -103,6 +105,8 @@ class WeatherRig():
             'Return': returnValue,
             'Status': self.status.status,
             'Process ID': self.pid,
+            'Worker Name': self.workerName,
+            'Check Interval': self.checkInterval,
         }
 
         return data
