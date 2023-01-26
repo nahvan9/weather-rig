@@ -9,7 +9,9 @@ class DiscordNotifs():
     def __init__(self, manager, webhookurl):
         self.manager = manager
         self.discord = Discord(url=webhookurl)
-
+        # Get script name
+        self.scriptName = self.manager.manager.config['scriptPath'].rsplit('\\')[-1]
+        
     # Receives content as a dictionary
     def post(self, content, *args, **kwargs):
         tempUnits = self.getTUnits(content)
@@ -23,9 +25,15 @@ class DiscordNotifs():
         # Format custom stats
         customMsg = ''        
         for k in customNotifs:
-            customMsg += (self.getMsg(k, content[k], unit=tempUnits)+'\n')
+            customMsg += (
+                self.getMsg(
+                    k, 
+                    content[k], 
+                    unit=tempUnits, 
+                    script=self.scriptName
+                ) + '\n'
+            )
                 
-        print(customMsg)
         self.discord.post(content=customMsg)
 
     # Returns custom discord notifications    
@@ -36,4 +44,3 @@ class DiscordNotifs():
     
     def getTUnits(self, content):
         return content['Temp Units'] or 'C'
-    

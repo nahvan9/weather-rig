@@ -23,8 +23,8 @@ def status(value, *args, **kwargs):
 def pid(value, *args, **kwargs):
     return f':tools: Process ID: {value}'
 
-def machine(value, *args, **kwargs):
-    return f':desktop: Worker name: {value}'
+def machine(value, script='Null', *args, **kwargs):
+    return f':desktop: Worker: {value}, Playing \'{script}\''
 
 def chkInterval(value, *args, **kwargs):
     return f':timer: Next status check in {utils.HrMinSec(value)}'
