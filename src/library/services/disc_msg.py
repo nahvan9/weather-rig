@@ -24,7 +24,7 @@ def pid(value, *args, **kwargs):
     return f':tools: Process ID: {value}'
 
 def machine(value, script='Null', *args, **kwargs):
-    return f':desktop: Worker: {value}, Playing \'{script}\''
+    return f':desktop: Worker: {value}\n:arrow_forward: Playing: \"{script}\"'
 
 def chkInterval(value, *args, **kwargs):
     return f':timer: Next status check in {utils.HrMinSec(value)}'
