@@ -17,6 +17,9 @@ logLevel: "DEBUG"
 # Check temperature interval in seconds
 checkInterval: 1800
 
+# Worker Name
+workerName: "testRig"
+
 # Batch file you want to start or stop
 scriptPath: "C:\\Users\\user\\Documents\\scripts\\script.bat"
 
